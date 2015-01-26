@@ -149,6 +149,25 @@ public class Matriz implements Cloneable {
         }
         return obj;
     }
+
+    
+	public static Matriz productoDosMatrices(Matriz a, Matriz b) throws DimensionesIncompatibles { 
+        if(! a.getDimension().height.equals(b.getDimension().width)) throw new DimensionesIncompatibles("La producto de matrices requiere matrices de dimensiones (n,m) y (m,n)");        
+        int i, j, filasA, columnasA; 
+        filasA = a.getDimension().height; 
+        columnasA = b.getDimension().width; 
+        Matriz matrizResultante = new Matriz(filasA, columnasA, false);
+        for (j = 0; j < filasA; j++) { 
+            for (i = 0; i < columnasA; i++) { 
+				for (k = 0; k < columnasA; i++) {
+					matrizResultante.datos[i][j] += a.datos[i][k] * b.datos[k][j]; 
+				}                
+            } 
+        } 
+        return matrizResultante; 
+    }
+	
+
     @Override
     public String toString(){
         String ret = "";
